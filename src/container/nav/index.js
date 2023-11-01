@@ -1,5 +1,5 @@
 class Nav {
-  static #HOME_PAGE = `https://www.google.com`
+  static #HOME_PAGE = 'https://google.com'
 
   static #back = () => {
     return history.back()
@@ -22,7 +22,7 @@ class Nav {
       const url = new URL(window.input.value)
       this.#changePage(url.href)
     } catch (e) {
-      alert('Введіть коректну адресу')
+      alert('Введіть коректну URL адресу')
       console.log(e)
     }
   }
@@ -32,12 +32,14 @@ class Nav {
   }
 
   static init = () => {
-    window.back.onclick = this.#back
-    window.forward.onclick = this.#forward
-    window.reload.onclick = this.#forward
-    window.home.onclick = this.#forward
-    window.go.onclick = this.#forward
+    window.back.onclick = this.#back.bind(this)
+    window.forward.onclick = this.#forward.bind(this)
+    window.reload.onclick = this.#reload.bind(this)
+    window.home.onclick = this.#home.bind(this)
+    window.go.onclick = this.#go.bind(this)
 
     window.input.value = location.href
   }
 }
+
+Nav.init()
